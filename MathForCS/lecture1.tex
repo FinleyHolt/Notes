@@ -1,0 +1,244 @@
+\documentclass[11pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage{amsmath, amssymb, amsthm} % Math packages
+\usepackage{graphicx}                % For figures
+\usepackage{caption, subcaption}     % For figure captions and subfigures
+\usepackage{booktabs}                % For better table rules
+\usepackage{listings}                % For code listings
+\usepackage{xcolor}                  % For color customization
+\usepackage{hyperref}                % For hyperlinks
+\usepackage{geometry}                % For page layout
+\usepackage{bookmark}
+
+% Page margins
+\geometry{margin=1in}
+
+% Define a simple code style for listings
+\definecolor{codegray}{rgb}{0.5,0.5,0.5}
+\definecolor{codegreen}{rgb}{0,0.6,0}
+\definecolor{backcolour}{rgb}{0.95,0.95,0.92}
+\lstdefinestyle{mystyle}{
+    backgroundcolor=\color{backcolour},
+    commentstyle=\color{codegreen},
+    keywordstyle=\color{magenta},
+    numberstyle=\tiny\color{codegray},
+    stringstyle=\color{blue},
+    basicstyle=\footnotesize\ttfamily,
+    breakatwhitespace=false,
+    breaklines=true,
+    captionpos=b,
+    keepspaces=true,
+    numbers=left,
+    numbersep=5pt,
+    showspaces=false,
+    showstringspaces=false,
+    showtabs=false,
+    tabsize=2
+}
+\lstset{style=mystyle}
+
+\theoremstyle{definition}
+\newtheorem{definition}{Definition}
+\newtheorem{example}{Example}
+
+\begin{document}
+
+\title{Lecture 1: Introduction and Proofs}
+\author{Finley Holt}
+\date{February 25, 2025}
+\maketitle
+
+\noindent
+\textbf{Notation Reference Table} \\
+Below is a quick reference for mathematical symbols used in these notes.
+
+\begin{table}[h!]
+\centering
+\begin{tabular}{ll}
+\toprule
+\textbf{Symbol} & \textbf{Meaning} \\
+\midrule
+$\forall$ & For all \\
+$\exists$ & There exists \\
+$\in$ & Element of \\
+$\implies$ & Implies \\
+$\iff$ & If and only if \\
+$\mathbb{N}$ & Set of natural numbers: \{0, 1, 2, \dots\} \\
+$\mathbb{Z}$ & Set of integers: \{\dots, -2, -1, 0, 1, 2, \dots\} \\
+\bottomrule
+\end{tabular}
+\caption{List of Notation}\label{tab:notation}
+\end{table}
+
+\section{What is a proof?}
+
+A proof is considered across multiple fields as a method for ascertaining the truth.
+
+There are many ways to ascertain truth:
+\begin{itemize}
+    \item Observation --- we observe an apple falling from a tree and conclude that gravity exists.
+    \item Sampling \& counterexamples (showing the opposite rigorously enough that we conclude the opposite is true).
+    \item Judges and juries make decisions on truths.
+    \item The word of God (religion).
+    \item In business, the customer is always right (the customer provides truth).
+    \item In university, a professor can be the source of truth due to their authority (this does not hold in this course as anyone can win an argument in mathematics based on the merit of their argument).
+    \item Inner conviction ``There are no bugs in my code''.
+    \item ``I don't see why not''. Pushes burden of proof to the opposite perspective.
+\end{itemize}
+
+A \textbf{mathematical proof} is a verification of a \textbf{proposition} by a chain of logical deductions from a set of \textbf{axioms}.
+
+\subsection{Propositions}
+
+\begin{definition}
+A \textbf{proposition} is a statement that is either \textit{True} or \textit{False}.
+\end{definition}
+
+\begin{example}
+  The following is a simple mathematical proposition:
+  \[
+  2 + 3 = 5
+  \]
+\end{example}
+  
+\begin{example}
+  \[
+  \forall n \in \mathbb{N}, \quad n^2 + n + 41 \text{ is prime}
+  \]
+  Here, \(\forall n \in \mathbb{N}\) signifies that the statement following the comma applies to all natural numbers \( n \), and the predicate \( n^2 + n + 41 \text{ is prime}\) is being evaluated for each such \( n \).
+\end{example}
+  
+\begin{center}
+Let's check if this predicate is true for every natural number \( n \):
+\begin{table}[h!]
+\centering
+\begin{tabular}{c c c}
+\toprule
+\(n\) & \(n^2 + n + 41\) & Prime? \\
+\midrule
+0 & 41 & Yes \\
+1 & 43 & Yes \\
+2 & 47 & Yes \\
+3 & 53 & Yes \\
+\vdots & \vdots & \vdots \\
+20 & 461 & Yes \\
+\bottomrule
+\end{tabular}
+\caption{Checking the predicate for \(n\) from 0 to 20}\label{tab:predicate_check}
+\end{table}
+\end{center}
+
+This example presents some problems, but we checked 20 examples so it must be true, right? Wrong! For \( n = 40 \), the equation equals \( 1681 \) which equals \( 41^2 \). For \( n = 41 \), the proposition is also false, although 40 is the first breakpoint.
+
+\begin{example}
+  Consider the proposition:
+  \[
+  a^4 + b^4 + c^4 = d^4
+  \]
+  This proposition states that there are no natural numbers \(a\), \(b\), \(c\), and \(d\) such that the equation holds true. This proposition was conjectured to be true by Euler in 1769. It was unsolved for over 2 centuries until it was disproved by Noam Elkies. He came up with \( a = 95,800 \), \( b = 217,519 \), \( c = 414,560 \), and \( d = 422,481 \). Therefore we can conclude that:
+
+  \[
+  \exists \; a, b, c, d \in \mathbb{N} \; \text{such that} \; a^4 + b^4 + c^4 = d^4
+  \]
+\end{example}
+
+\begin{example}
+  \[
+    313 \cdot (x^3 + y^3) = z^3 \text{ has no positive integer solutions.}
+  \]
+  This turns out to be false but the shortest possible counter-example has over 1000 digits.
+  \vspace{.5cm}
+  
+  \textbf{Why Does this Matter?} \\
+  This is all very relevant to factoring. Factoring is the way to break crypto systems, most of which are based on number theory and more particularly factoring. If you can find solutions to things like this, you can get an angle and a wedge on factoring. This is why today, RSA uses thousand digit modulases instead of 100 digit modulases like they used to use. If you can break those crypto systems, you can't rule the world but you get close.
+\end{example}
+
+\begin{example}
+\textit{The regions in any map can be colored in 4 colors so that adjacent regions have different colors.}
+\vspace{.5cm}
+
+This is known as the 4 Color Theorem, first conjectured by Francis Guthrie in 1853. Over the next century, many false proofs emerged. One of the most convincing was by Alfred Kempe in 1879, which relied on diagrams and was accepted for over a decade. Proofs by picture are often very convincing and very wrong. In creating the pictures, you constrain your thinking to a limit of possibilities that doesn't account for the whole parameter space. It wasn't until 1976 that Kenneth Appel and Wolfgang Haken proved the theorem using a computer to check 1,936 map configurations. This proof was controversial as it was the first major proof to use a computer, but it was later verified by other mathematicians.
+\end{example}
+
+\begin{example}
+Every even integer, but 2, is the sum of 2 primes.
+\[
+\text{Ex: } 24 = 11 + 13
+\]
+This is called Golbach's conjecture, made in 1742. This is a very simple proposition and yet, it still remains unproven. It is listed by \textit{The Globe} as one of the great unsolved mysteries.
+\end{example}
+
+\begin{example}
+  \[
+  \forall \; n \in \mathbb{Z},\quad n \geq 2 \implies n^2 \geq 4
+  \]
+  This statement is true because for any integer \( n \) that is greater than or equal to 2, the square of \( n \) will always be greater than or equal to 4.
+
+  \textbf{Example of Implication:} \\
+  Consider the statement: ``If pigs fly, then I'm king''.
+  \begin{itemize}
+    \item Let \(p\) be ``pigs fly'' and \(q\) be ``I'm king''.
+    \item The implication \(p \implies q\) is true if \(p\) is false or \(q\) is true.
+    \item In reality, pigs do not fly (\(p\) is false). Therefore, the implication \(p \implies q\) is true regardless of whether \(q\) is true or false.
+  \end{itemize}
+\end{example}
+
+\begin{example}
+\[
+\forall \; n \in \mathbb{Z},\quad n \geq 2 \iff n^2 \geq 4
+\]
+This statement is false for some values (e.g., if \(n=1\) or \(n=3\), the biconditional does not hold).
+\end{example}
+
+\begin{table}[h!]
+\centering
+\begin{tabular}{ccccc}
+\toprule
+\(p\) & \(q\) & \(p \implies q\) & \(q \implies p\) & \((p \iff q)\) \\
+\midrule
+T & T & T & T & T \\
+T & F & F & T & F \\
+F & T & T & F & F \\
+F & F & T & T & T \\
+\bottomrule
+\end{tabular}
+\caption{Combined Truth Table for Implications in Both Directions and the Biconditional}
+\end{table}
+
+\subsection{Axioms}
+
+\begin{definition}
+  An \textbf{axiom} is a \textit{proposition} assumed to be \textit{true}. The word axiom comes from Greek, meaning to think worthy.
+\end{definition}
+
+Making assumptions while doing math is very important. They key in math is to identify your assumptions so that people can see them. The idea is that when you do a proof, anyone that agrees with your axioms must agree with your conclusion.
+
+\begin{example}
+  Consider the following axiom: If \( A = B \) and \( B = C \), then \( A = C \). There is no proof of this, but it seems pretty good so we throw it in the bucket of axioms and use it.
+\end{example}
+
+\begin{example}
+  Euclidean Geometry: Given a line \( L \) and a point \( p \) not on \( L \), there is exactly one line through \( p \) that is parallel to \( L \).
+\end{example}
+
+\begin{example}
+  Spherical Geometry: Given a line \( L \) and a point \( p \) not on \( L \), there is no line through \( p \) that is parallel to \( L \) (on the sphere).
+\end{example}
+
+\begin{example}
+  Hyperbolic Geometry: Given a line \( L \) and a point \( p \) not on \( L \), there are infinitely many lines through \( p \) that are parallel to \( L \).
+\end{example}
+
+\textbf{Note:} The choice of axioms can vary depending on the field of study. In mathematics, different sets of axioms can lead to different geometries, as shown in the examples above. The key is to clearly state your axioms so that others can understand the foundation of your arguments. This flexibility allows for the exploration of various mathematical structures and theories.
+
+Axioms should be:
+\begin{itemize}
+  \item \textbf{Consistent:} A set of axioms is consistent if no proposition can be proven to be both true and false.
+  \item \textbf{Complete:} A set of axioms is complete if it can be used to prove every proposition is either true or false.
+\end{itemize}
+
+In the 1930s, Kurt Gödel proved that there exists no consistent and complete set of axioms for all of mathematics. This is known as the \textit{Incompleteness Theorem}. If you want consistency (which is a must), then there will be true facts that you will not be able to prove.
+
+\end{document}

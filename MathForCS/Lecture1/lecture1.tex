@@ -1,0 +1,96 @@
+\documentclass[11pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage{amsmath, amssymb, amsthm} % Math packages
+\usepackage{graphicx}                % For figures
+\usepackage{caption, subcaption}     % For figure captions and subfigures
+\usepackage{listings}                % For code listings
+\usepackage{xcolor}                  % For color customization
+\usepackage{hyperref}                % For hyperlinks
+\usepackage{geometry}                % For page layout
+\usepackage{bookmark}
+
+% Page margins
+\geometry{margin=1in}
+
+% Define a simple code style for listings
+\definecolor{codegray}{rgb}{0.5,0.5,0.5}
+\definecolor{codegreen}{rgb}{0,0.6,0}
+\definecolor{backcolour}{rgb}{0.95,0.95,0.92}
+\lstdefinestyle{mystyle}{
+    backgroundcolor=\color{backcolour},
+    commentstyle=\color{codegreen},
+    keywordstyle=\color{magenta},
+    numberstyle=\tiny\color{codegray},
+    stringstyle=\color{blue},
+    basicstyle=\footnotesize\ttfamily,
+    breakatwhitespace=false,
+    breaklines=true,
+    captionpos=b,
+    keepspaces=true,
+    numbers=left,
+    numbersep=5pt,
+    showspaces=false,
+    showstringspaces=false,
+    showtabs=false,
+    tabsize=2
+}
+\lstset{style=mystyle}
+
+\theoremstyle{definition}
+\newtheorem{definition}{Definition}
+\newtheorem{example}{Example}
+
+\begin{document}
+
+\title{Lecture 1: Introduction and Proofs}
+\author{Finley Holt}
+\date{February 25, 2025}
+\maketitle
+
+\section{What is a proof?}
+
+A proof is considered across multiple fields as a method for ascertaining the truth.
+
+There are many ways to ascertain truth:
+
+\begin{itemize}
+    \item Observation - we observe an apple falling from a tree and conclude that gravity exists.
+    \item Sampling \& counterexamples (showing the opposite rigourosly enough that we conclude the opposite is true).
+    \item Judges and juries make decisions on truths.
+    \item The word of God (religion).
+    \item In business, the customer is always right (the customer provides truth).
+    \item In university, a professor can be the source of truth due to their authority (this does not hold in this course as anyone can win an argument in mathematics based on the merit of their argument).
+    \item Inner conviction ``There are no bugs in my code!''
+    \item ``I don't see why not.'' Pushes burden of proof to the opposite perspective.
+\end{itemize}
+
+A \textbf{mathematical proof} is a verification of a \textbf{proposition} by a chain of logical deductions from a set of \textbf{axioms}.
+
+\begin{definition}
+A \textbf{proposition} is a statement that is either \textit{True} or \textit{False}.
+\end{definition}
+
+\begin{example}
+The following is a simple mathematical proposition:
+\[
+2 + 3 = 5
+\]
+\end{example}
+
+\begin{example}
+\[
+\forall n \in \mathbb{N}, \quad n^2 + n + 41 \text{ is prime}.
+\]
+\end{example}
+
+\\subsection*{Notation}
+\begin{description}
+  \item[$\forall$] The universal quantifier, meaning ``for all.''
+  \item[$n$] A variable representing a natural number.
+  \item[$\mathbb{N}$] The set of natural numbers.
+\end{description}
+
+end{document}
+
