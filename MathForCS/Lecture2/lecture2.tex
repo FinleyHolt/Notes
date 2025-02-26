@@ -5,21 +5,134 @@
 \usepackage{amsmath, amssymb, amsthm}  % Essential math packages
 \usepackage{graphicx}                 % For figures
 \usepackage{geometry}                 % For page layout
+\usepackage{fancyhdr}                 % For custom headers
+\setlength{\headheight}{30pt}   % Adjust headheight
+\usepackage{enumitem}                 % For customized lists
+\usepackage{cancel}                   % For striking out text in math mode
+\usepackage{ulem}                     % For strikeout text
 
-% Set page margins
-\geometry{margin=1in}
+\sloppy
 
 \theoremstyle{definition}
 \newtheorem{definition}{Definition}
 \newtheorem{example}{Example}
 
+% Define a custom header command with two minipages to ensure equal baseline alignment
+\newcommand{\customheader}[2]{%
+    \noindent%
+    \begin{minipage}[b]{0.48\textwidth}
+        \raggedright#1
+    \end{minipage}%
+    \hfill%
+    \begin{minipage}[b]{0.48\textwidth}
+        \raggedleft#2
+    \end{minipage}%
+}
+
+% Define the first page style
+\fancypagestyle{firstpage}{
+    \fancyhf{} % clear header and footer
+    \renewcommand{\headrulewidth}{0.4pt} % horizontal line under header
+    % Use the custom header in the center of the header area
+    \fancyhead[C]{\customheader{
+        \mbox{6.042/18.062J Mathematics for Computer Science}\\Notes by Finley Holt}
+        {Fall, 2010\\February 26, 2025}
+    }
+}
+
+% Define the default header for subsequent pages (follow-on pages)
+\pagestyle{fancy}
+\fancyhf{} % clear header and footer
+\renewcommand{\headrulewidth}{0.4pt} % horizontal line under header
+\fancyhead[L]{\textit{Notes for Lecture 2: Induction}}
+\fancyhead[R]{\thepage}
+
 \begin{document}
 
-\title{Lecture 2: Induction}
-\author{Finley Holt}
-\date{February 26, 2025}
-\maketitle
+% First page uses the custom firstpage style
+\thispagestyle{firstpage}
 
+\vspace*{0cm} % Adjust vertical space as needed
 
+% Centered title block on the first page
+\begin{center}
+    \Large \textbf{Notes for Lecture 2: Induction}
+\end{center}
 
+\vspace{1cm} % Adjust as needed
+
+\section{Proof by Contradiction}
+To prove a proposition \( P \) is true, we assume that \( P \) is false (i.e. \( \neg P \) is true) and then use this hypothesis to derive a falsehood or contradiction. We can show that \( P \) is true if we can show that \( \neg P \implies F \), \( F \) being a falsehood.
+
+\begin{example}
+        Prove that \( \sqrt{2} \) is irrational.
+
+        An irrational number is a number that can't be expressed as a ratio of integers.
+
+        \textbf{Proof:} (by contradiction)\\
+        Assume for the purpose of contradiction that \( \sqrt{2} \) is rational.
+        \begin{align*}
+                &\rightarrow \sqrt{2} = \frac{a}{b} \quad \text{(fraction in lowest terms)} \\
+                &\rightarrow 2 = \frac{a^2}{b^2} \\
+                &\rightarrow 2b^2 = a^2 \\
+                &\rightarrow a \text{ is even} \quad (2 \mid a) \\
+                &\rightarrow 4 \mid a^2 \\
+                &\rightarrow 4 \mid 2b^2 \\
+                &\rightarrow 2 \mid b^2 \\
+                &\rightarrow b \text{ is even} \\
+                &\rightarrow a \text{ and } b \text{ are not in lowest terms (common factor of 2)} \\
+                &\rightarrow \text{contradiction} \\
+                &\rightarrow \sqrt{2} \text{ is irrational}
+        \end{align*}
+
+        This proof was first discovered by the Pythagoreans in ancient Greece, a religious society founded by Pythagoras. In ancient Greece, math was intertwined with religion. The Pythagoreans believed in two key gods: Aperon, the god of infinity and chaos, and Peros, the god of the finite and order. They held that all numbers were rational, as irrational numbers represented the infinite and were considered bad. One of their axioms was that the length of every line was finite and rational. According to the Pythagorean theorem, a triangle with two sides of length 1 has a hypotenuse of \( \sqrt{2} \), which by their axioms, should be rational. However, they eventually discovered a proof that \( \sqrt{2} \) was irrational, causing a major crisis in their society. Their axioms were inconsistent, casting doubt on all their theorems. They tried to keep this proof a secret, but a whistleblower revealed it, and legend has it that they killed the person who exposed the proof.
+\end{example}
+
+\section{Induction Axiom}
+\begin{itemize}
+        \item Let \( P(n) \) be a predicate. If \( P(0) \) is true and \( \forall \; n \in \mathbb{N}, P(n) \implies P(n+1) \) is true, then \( \forall \; n \in \mathbb{N}, P(n) \) is true.
+        \item If \( P(0) \), \( P(0) \implies P(1) \), \( P(1) \implies P(2) \), \ldots are true.
+\end{itemize}
+
+You can view this like dominoes. If you can prove that the first domino falls, and that if any domino falls, the next one will fall, then all the dominoes will fall.
+
+\textbf{Theorem:} \( \forall n \geq 0 \) \( 1 + 2 + 3 + \cdots + n = \frac{n(n+1)}{2} \)
+
+Aside: Here are different ways to express the sum of the first \( n \) natural numbers:
+\begin{itemize}
+         \item \( 1 + 2 + 3 + \ldots + n \)
+         \item \( \sum_{i=1}^{n} i \)
+         \item \( \sum_{1 \leq i \leq n} i \)
+\end{itemize}
+
+If \( n=1 \)
+\hspace*{1cm}
+\( 1 + \cancel{2} + \cancel{3} + \cdots + n = 1 \)
+
+If \( n \leq 0 \)
+\hspace*{1cm}
+\( \cancel{1} + \cancel{2} + \cancel{3} + \cdots + n = 0 \)
+
+If \( n = 4 \)
+\hspace*{1cm}
+\( 1 + 2 + 3 + 4 = 10 \)
+
+\textbf{Proof:} (by induction)
+
+Let \( P(n) \) be the proposition that \( \sum_{i=1}^{n} i = \frac{n(n+1)}{2} \).
+
+\begin{itemize}
+        \item Base case: \( P(0) \) is true because \( \sum_{i=1}^{0} i = 0 = \frac{0(0+1)}{2} \).
+        \item Inductive step: For \( n \geq 0 \), show \( P(n) \implies P(n+1) \).
+        \item Assume \( P(n) \) is true for purposes of induction (we assumed \( 1 + 2 + \cdots + n = \frac{n(n+1)}{2} \) ).
+        \item We need to show that \( 1+2+\cdots+n+(n+1) = \frac{(n+1)(n+2)}{2} \).
+        \begin{align*}
+                \sum_{i=1}^{n+1} i &= \sum_{i=1}^{n} i + (n+1) \\
+                &= \frac{n(n+1)}{2} + (n+1) \\
+                &= \frac{n(n+1) + 2(n+1)}{2} \\
+                &= \frac{(n+1)(n+2)}{2} \quad \checkmark
+        \end{align*}
+        Therefore, \( P(n+1) \) is true.\ 
+\end{itemize}
+ % Stopped watching lecture at 36:40
 \end{document}

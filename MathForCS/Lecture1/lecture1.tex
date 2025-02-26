@@ -28,22 +28,22 @@
 \definecolor{codegreen}{rgb}{0,0.6,0}
 \definecolor{backcolour}{rgb}{0.95,0.95,0.92}
 \lstdefinestyle{mystyle}{
-    backgroundcolor=\color{backcolour},
-    commentstyle=\color{codegreen},
-    keywordstyle=\color{magenta},
-    numberstyle=\tiny\color{codegray},
-    stringstyle=\color{blue},
-    basicstyle=\footnotesize\ttfamily,
-    breakatwhitespace=false,
-    breaklines=true,
-    captionpos=b,
-    keepspaces=true,
-    numbers=left,
-    numbersep=5pt,
-    showspaces=false,
-    showstringspaces=false,
-    showtabs=false,
-    tabsize=2
+  backgroundcolor=\color{backcolour},
+  commentstyle=\color{codegreen},
+  keywordstyle=\color{magenta},
+  numberstyle=\tiny\color{codegray},
+  stringstyle=\color{blue},
+  basicstyle=\footnotesize\ttfamily,
+  breakatwhitespace=false,
+  breaklines=true,
+  captionpos=b,
+  keepspaces=true,
+  numbers=left,
+  numbersep=5pt,
+  showspaces=false,
+  showstringspaces=false,
+  showtabs=false,
+  tabsize=2
 }
 \lstset{style=mystyle}
 
@@ -51,11 +51,11 @@
 \newcommand{\customheader}[2]{%
   \noindent%
   \begin{minipage}[b]{0.48\textwidth}
-    \raggedright#1
+  \raggedright#1
   \end{minipage}%
   \hfill%
   \begin{minipage}[b]{0.48\textwidth}
-    \raggedleft#2
+  \raggedleft#2
   \end{minipage}%
 }
 
@@ -65,8 +65,8 @@
   \renewcommand{\headrulewidth}{0.4pt} % horizontal line under header
   % Use the custom header in the center of the header area
   \fancyhead[C]{\customheader{
-    \mbox{6.042/18.062J Mathematics for Computer Science}\\Notes by Finley Holt}
-    {Fall, 2010\\DATE}
+  \mbox{6.042/18.062J Mathematics for Computer Science}\\Notes by Finley Holt}
+  {Fall, 2010\\February 25, 2025}
   }
 }
 
@@ -75,8 +75,8 @@
 \fancyhf{} % clear header and footer
 \renewcommand{\headrulewidth}{0.4pt} % horizontal line under header
 \fancyhead[C]{\customheader{
-    \textit{Lecture 1: Introduction and Proofs}}
-    {\thepage}
+  \textit{Lecture 1: Introduction and Proofs}}
+  {\thepage}
 }
 
 \begin{document}
@@ -103,13 +103,13 @@ Below is a quick reference for mathematical symbols used in these notes.
 \toprule
 \textbf{Symbol} & \textbf{Meaning} \\
 \midrule
-$\forall$ & For all \\
-$\exists$ & There exists \\
-$\in$ & Element of \\
-$\implies$ & Implies \\
-$\iff$ & If and only if \\
-$\mathbb{N}$ & Set of natural numbers: \{0, 1, 2, \dots\} \\
-$\mathbb{Z}$ & Set of integers: \{\dots, -2, -1, 0, 1, 2, \dots\} \\
+\(\forall\) & For all \\
+\(\exists\) & There exists \\
+\(\in\) & Element of \\
+\(\implies\) & Implies \\
+\(\iff\) & If and only if \\
+\(\mathbb{N}\) & Set of natural numbers: \{0, 1, 2, \dots\} \\
+\(\mathbb{Z}\) & Set of integers: \{\dots, -2, -1, 0, 1, 2, \dots\} \\
 \bottomrule
 \end{tabular}
 \caption{List of Notation}\label{tab:notation}
@@ -121,14 +121,14 @@ A proof is considered across multiple fields as a method for ascertaining the tr
 
 There are many ways to ascertain truth:
 \begin{itemize}
-    \item Observation --- we observe an apple falling from a tree and conclude that gravity exists.
-    \item Sampling \& counterexamples (showing the opposite rigorously enough that we conclude the opposite is true).
-    \item Judges and juries make decisions on truths.
-    \item The word of God (religion).
-    \item In business, the customer is always right (the customer provides truth).
-    \item In university, a professor can be the source of truth due to their authority (this does not hold in this course as anyone can win an argument in mathematics based on the merit of their argument).
-    \item Inner conviction ``There are no bugs in my code''.
-    \item ``I don't see why not''. Pushes burden of proof to the opposite perspective.
+  \item Observation --- we observe an apple falling from a tree and conclude that gravity exists.
+  \item Sampling \& counterexamples (showing the opposite rigorously enough that we conclude the opposite is true).
+  \item Judges and juries make decisions on truths.
+  \item The word of God (religion).
+  \item In business, the customer is always right (the customer provides truth).
+  \item In university, a professor can be the source of truth due to their authority (this does not hold in this course as anyone can win an argument in mathematics based on the merit of their argument).
+  \item Inner conviction ``There are no bugs in my code''.
+  \item ``I don't see why not''. Pushes burden of proof to the opposite perspective.
 \end{itemize}
 
 A \textbf{mathematical proof} is a verification of a \textbf{proposition} by a chain of logical deductions from a set of \textbf{axioms}.
@@ -136,7 +136,7 @@ A \textbf{mathematical proof} is a verification of a \textbf{proposition} by a c
 \subsection{Propositions}
 
 \begin{definition}
-A \textbf{proposition} is a statement that is either \textit{True} or \textit{False}.
+A \textbf{proposition} is a statement that is either \textit{true} or \textit{false}.
 \end{definition}
 
 \begin{example}
@@ -189,7 +189,7 @@ This example presents some problems, but we checked 20 examples so it must be tr
 
 \begin{example}
   \[
-    313 \cdot (x^3 + y^3) = z^3 \text{ has no positive integer solutions.}
+  313 \cdot (x^3 + y^3) = z^3 \text{ has no positive integer solutions.}
   \]
   This turns out to be false but the shortest possible counter-example has over 1000 digits.
   \vspace{.5cm}
@@ -222,9 +222,9 @@ This is called Golbach's conjecture, made in 1742. This is a very simple proposi
   \textbf{Example of Implication:} \\
   Consider the statement: ``If pigs fly, then I'm king''.
   \begin{itemize}
-    \item Let \(p\) be ``pigs fly'' and \(q\) be ``I'm king''.
-    \item The implication \(p \implies q\) is true if \(p\) is false or \(q\) is true.
-    \item In reality, pigs do not fly (\(p\) is false). Therefore, the implication \(p \implies q\) is true regardless of whether \(q\) is true or false.
+  \item Let \(p\) be ``pigs fly'' and \(q\) be ``I'm king''.
+  \item The implication \(p \implies q\) is true if \(p\) is false or \(q\) is true.
+  \item In reality, pigs do not fly (\(p\) is false). Therefore, the implication \(p \implies q\) is true regardless of whether \(q\) is true or false.
   \end{itemize}
 \end{example}
 

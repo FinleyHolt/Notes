@@ -6,7 +6,7 @@
 \usepackage{graphicx}                 % For figures
 \usepackage{geometry}                 % For page layout
 \usepackage{fancyhdr}                 % For custom headers
-\setlength{\headheight}{30pt}   % Adjust headheight
+\setlength{\headheight}{30pt}         % Adjust headheight if needed
 \usepackage{enumitem}                 % For customized lists
 
 \sloppy
@@ -27,26 +27,25 @@
   \end{minipage}%
 }
 
-% Define the first page style
+% Define the first page style using the custom header
 \fancypagestyle{firstpage}{
   \fancyhf{} % clear header and footer
   \renewcommand{\headrulewidth}{0.4pt} % horizontal line under header
-  % Use the custom header in the center of the header area
-  \fancyhead[C]{\customheader{
-    \mbox{6.042/18.062J Mathematics for Computer Science}\\Notes by Finley Holt}
-    {Fall, 2010\\DATE}
+  \fancyhead[C]{%
+    \customheader{%
+      \mbox{6.042/18.062J Mathematics for Computer Science}\\Notes by Finley Holt%
+    }{%
+      Fall, 2010\\DATE%
+    }%
   }
 }
 
-
-% Define the default header for subsequent pages
+% Define the default header for subsequent pages (follow-on pages)
 \pagestyle{fancy}
 \fancyhf{} % clear header and footer
 \renewcommand{\headrulewidth}{0.4pt} % horizontal line under header
-\fancyhead[C]{\customheader{
-    \textit{Lecture [NUMBER]: [TOPIC]}}
-    {\thepage}
-}
+\fancyhead[L]{\textit{Notes for Lecture [NUMBER]: [TOPIC]}}
+\fancyhead[R]{\thepage}
 
 \begin{document}
 
@@ -76,6 +75,8 @@
 \begin{example}
   % Example: Insert an example related to the lecture content.
 \end{example}
+
+\newpage
 
 \section{Conclusion}
 % Summarize the lecture and mention any follow-up work or questions.
