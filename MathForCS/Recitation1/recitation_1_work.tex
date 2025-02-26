@@ -1,0 +1,78 @@
+\documentclass[11pt,fleqn]{article}
+\usepackage[margin=1in]{geometry}
+\usepackage{fancyhdr}
+\setlength{\headheight}{25.89253pt}
+\addtolength{\topmargin}{-13.89253pt}
+\usepackage{amsmath, amssymb}
+\usepackage{enumitem}
+
+% Define the first page style
+\fancypagestyle{firstpage}{
+  \fancyhf{} % clear header and footer
+  \renewcommand{\headrulewidth}{0.4pt} % horizontal line under header
+  \fancyhead[L]{6.042/18.062J Mathematics for Computer Science\\Work by Finley Holt}
+  \fancyhead[R]{Fall, 2010\\February 26, 2025}
+}
+
+% Define the default header for subsequent pages
+\pagestyle{fancy}
+\fancyhf{} % clear header and footer
+\renewcommand{\headrulewidth}{0.4pt} % horizontal line under header
+\fancyhead[L]{\textit{Recitation 1}}
+\fancyhead[R]{\thepage}
+
+\begin{document}
+
+% First page uses the custom firstpage style
+\thispagestyle{firstpage}
+
+% Add vertical space manually by inserting a blank section with forced spacing
+\vspace*{1cm} % Adjust value as needed
+
+% Centered title block on the first page
+\begin{center}
+  \Large \textbf{Work for Recitation 1}
+\end{center}
+
+\vspace{1cm} % Adjust as needed
+
+\section{Team Problem: A Mystery}
+
+A certain cabal within the 6.042 course staff is plotting to make the final exam ridiculously hard. (``Problem 1. Prove that the axioms of mathematics are complete and consistent. Express your answer in Mayan hieroglyphics.'')
+
+The only way to stop their evil plan is to determine exactly who is in the cabal. The course staff consists of nine people:
+\[
+\{\,\text{Oscar},\, \text{Stav},\, \text{Darren},\, \text{Patrice},\, \text{David},\, \text{Nick},\, \text{Martyna},\, \text{Marten},\, \text{Tom}\}.
+\]
+The cabal is a subset of these nine. A membership roster has been found and appears below, but it is deviously encrypted in logic notation. The predicate \texttt{incabal} indicates who is in the cabal; that is, \(\texttt{incabal}(x)\) is true if and only if \(x\) is a member. Translate each statement below into English and deduce who is in the cabal.
+
+\begin{enumerate}[label= (\roman*), leftmargin=*]
+  \item \( \exists x\,\exists y\,\exists z\, \bigl( x \neq y \wedge x \neq z \wedge y \neq z \wedge \textit{incabal}(x) \wedge \textit{incabal}(y) \wedge \textit{incabal}(z) \bigr) \)
+  
+  There exists an x, y, and z such that x, y, and z are all different people and x, y, and z are all in the cabal.
+  \item \( \neg\Bigl( \textit{incabal}(\text{Stav}) \wedge \textit{incabal}(\text{David}) \Bigr) \)
+  
+  It is not true that Stav and David are both in the cabal.
+  \item \( \bigl( \textit{incabal}(\text{Martyna}) \vee \textit{incabal}(\text{Patrice}) \bigr)
+  \to \forall x\, \textit{incabal}(x) \)
+
+  Martyna or Patrice are in the cabal implies everyone is in the cabal.
+  \item \( \textit{incabal}(\text{Stav}) \to \textit{incabal}(\text{David}) \)
+  
+  Stav being in the cabal implies David is in the cabal.
+  \item \( \textit{incabal}(\text{Darren}) \to \textit{incabal}(\text{Martyna}) \)
+  
+  Darren being in the cabal implies Martyna is in the cabal.
+  \item \( \bigl( \textit{incabal}(\text{Oscar}) \vee \textit{incabal}(\text{Nick}) \bigr)
+  \to \neg \textit{incabal}(\text{Tom}) \)
+
+  Oscar or Nick being in the cabal implies Tom is not in the cabal.
+  \item \( \bigl( \textit{incabal}(\text{Oscar}) \vee \textit{incabal}(\text{David}) \bigr)
+  \to \neg \textit{incabal}(\text{Marten}) \)
+
+  Oscar or David being in the cabal implies Marten is not in the cabal.
+\end{enumerate}
+
+From item (i), we know that there are at least 3 distinct people in the cabal. From item (ii), we know either Stav is in the cabal, David is in the cabal, or neither Stav or David are in the cabal. We can use item (iv) to confirm it is David who is in the cabal. Stav being in the cabal implying that David is in the cabal is true is Stav is not in the cabal or if Stav and David are both in the cabal. From item (ii), we know that both Stav and David cannot be in the cabal so it must be David that is in the cabal to satisfy items (ii) and (iv). Now from item (iii), we know that if Martyna or Patrice are in the cabal, then everyone is in the cabal. Since Stav cannot be in the cabal, we know that not everyone can be in the cabal. Since the second proposition is false, the first proposition must be false as well. From that we know that neither Martyna or Patrice are in the cabal. Item (v) states that Darren being in the cabal implies Martyna is in the cabal. We know that Martyna is not in the cabal so Darren cannot be in the cabal. Item (vi) states that Oscar or Nick being in the cabal implies Tom is not in the cabal. Item (vii) states that Oscar or David being in the cabal implies that Marten is not in the cabal. Since David is in the cabal, Marten cannot be in the cabal. From item (i), we know that there must be at least 3 members of the cabal. For statement (vi) and statement (i) to be true, both Oscar and Nick must be in the cabal. If the second preposition was false, then the first would also have to be false, but in this case there are only 2 members of the cabal. This leaves only Oscar, Nick, and David in the cabal.
+
+\end{document}
