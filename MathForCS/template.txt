@@ -1,0 +1,83 @@
+\documentclass[11pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage{amsmath, amssymb, amsthm}  % Essential math packages
+\usepackage{graphicx}                 % For figures
+\usepackage{geometry}                 % For page layout
+\usepackage{fancyhdr}                 % For custom headers
+\setlength{\headheight}{30pt}   % Adjust headheight
+\usepackage{enumitem}                 % For customized lists
+
+\sloppy
+
+\theoremstyle{definition}
+\newtheorem{definition}{Definition}
+\newtheorem{example}{Example}
+
+% Define a custom header command with two minipages to ensure equal baseline alignment
+\newcommand{\customheader}[2]{%
+  \noindent%
+  \begin{minipage}[b]{0.48\textwidth}
+    \raggedright#1
+  \end{minipage}%
+  \hfill%
+  \begin{minipage}[b]{0.48\textwidth}
+    \raggedleft#2
+  \end{minipage}%
+}
+
+% Define the first page style
+\fancypagestyle{firstpage}{
+  \fancyhf{} % clear header and footer
+  \renewcommand{\headrulewidth}{0.4pt} % horizontal line under header
+  % Use the custom header in the center of the header area
+  \fancyhead[C]{\customheader{
+    \mbox{6.042/18.062J Mathematics for Computer Science}\\Notes by Finley Holt}
+    {Fall, 2010\\DATE}
+  }
+}
+
+
+% Define the default header for subsequent pages
+\pagestyle{fancy}
+\fancyhf{} % clear header and footer
+\renewcommand{\headrulewidth}{0.4pt} % horizontal line under header
+\fancyhead[C]{\customheader{
+    \textit{Lecture [NUMBER]: [TOPIC]}}
+    {\thepage}
+}
+
+\begin{document}
+
+% First page uses the custom firstpage style
+\thispagestyle{firstpage}
+
+\vspace*{1cm} % Adjust vertical space as needed
+
+% Centered title block on the first page
+\begin{center}
+  \Large \textbf{Notes for Lecture [NUMBER]: [TOPIC]}
+\end{center}
+
+\vspace{1cm} % Adjust as needed
+
+\section{Introduction}
+% Provide an overview of today's lecture and main objectives.
+
+\section{Key Definitions and Notation}
+% Write your definitions and any key notation.
+\begin{definition}
+  % Example: A new definition goes here.
+\end{definition}
+
+\section{Main Content}
+% Develop your arguments, proofs, and examples here.
+\begin{example}
+  % Example: Insert an example related to the lecture content.
+\end{example}
+
+\section{Conclusion}
+% Summarize the lecture and mention any follow-up work or questions.
+
+\end{document}
