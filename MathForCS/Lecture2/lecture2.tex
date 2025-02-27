@@ -6,16 +6,15 @@
 \usepackage{graphicx}                 % For figures
 \usepackage{geometry}                 % For page layout
 \usepackage{fancyhdr}                 % For custom headers
-\setlength{\headheight}{30pt}   % Adjust headheight
+\setlength{\headheight}{30pt}         % Adjust headheight
 \usepackage{enumitem}                 % For customized lists
 \usepackage{cancel}                   % For striking out text in math mode
 \usepackage{ulem}                     % For strikeout text
+\usepackage{setspace}                 % For line spacing
 
-\sloppy
+\allowdisplaybreaks
 
-\theoremstyle{definition}
-\newtheorem{definition}{Definition}
-\newtheorem{example}{Example}
+% Removed default definition and example blocks; we'll format these sections manually.
 
 % Define a custom header command with two minipages to ensure equal baseline alignment
 \newcommand{\customheader}[2]{%
@@ -47,6 +46,9 @@
 \fancyhead[L]{\textit{Notes for Lecture 2: Induction}}
 \fancyhead[R]{\thepage}
 
+% Set default line spacing to 1.5
+\setstretch{1.5}
+
 \begin{document}
 
 % First page uses the custom firstpage style
@@ -62,77 +64,157 @@
 \vspace{1cm} % Adjust as needed
 
 \section{Proof by Contradiction}
-To prove a proposition \( P \) is true, we assume that \( P \) is false (i.e. \( \neg P \) is true) and then use this hypothesis to derive a falsehood or contradiction. We can show that \( P \) is true if we can show that \( \neg P \implies F \), \( F \) being a falsehood.
+To prove a proposition \( P \) is true, we assume that \( P \) is false (i.e. \( \neg P \) is true) and then use this hypothesis to derive a falsehood or contradiction. We can show that \( P \) is true if we can show that \( \neg P \implies F \), where \( F \) is a falsehood.
 
-\begin{example}
-        Prove that \( \sqrt{2} \) is irrational.
+\subsection*{Example: Prove that \( \sqrt{2} \) is irrational}
+An irrational number is one that cannot be expressed as a ratio of integers.
 
-        An irrational number is a number that can't be expressed as a ratio of integers.
+\textbf{Proof:} (by contradiction)
+Assume for the purpose of contradiction that \( \sqrt{2} \) is rational.
+\begin{align*}
+    &\rightarrow \sqrt{2} = \frac{a}{b} \quad \text{(fraction in lowest terms)} \\
+    &\rightarrow 2 = \frac{a^2}{b^2} \\
+    &\rightarrow 2b^2 = a^2 \\
+    &\rightarrow a \text{ is even} \quad (2 \mid a) \\
+    &\rightarrow 4 \mid a^2 \\
+    &\rightarrow 4 \mid 2b^2 \\
+    &\rightarrow 2 \mid b^2 \\
+    &\rightarrow b \text{ is even} \\
+    &\rightarrow a \text{ and } b \text{ are not in lowest terms (common factor of 2)} \\
+    &\rightarrow \text{contradiction} \\
+    &\rightarrow \sqrt{2} \text{ is irrational}
+\end{align*}
 
-        \textbf{Proof:} (by contradiction)\\
-        Assume for the purpose of contradiction that \( \sqrt{2} \) is rational.
-        \begin{align*}
-                &\rightarrow \sqrt{2} = \frac{a}{b} \quad \text{(fraction in lowest terms)} \\
-                &\rightarrow 2 = \frac{a^2}{b^2} \\
-                &\rightarrow 2b^2 = a^2 \\
-                &\rightarrow a \text{ is even} \quad (2 \mid a) \\
-                &\rightarrow 4 \mid a^2 \\
-                &\rightarrow 4 \mid 2b^2 \\
-                &\rightarrow 2 \mid b^2 \\
-                &\rightarrow b \text{ is even} \\
-                &\rightarrow a \text{ and } b \text{ are not in lowest terms (common factor of 2)} \\
-                &\rightarrow \text{contradiction} \\
-                &\rightarrow \sqrt{2} \text{ is irrational}
-        \end{align*}
-
-        This proof was first discovered by the Pythagoreans in ancient Greece, a religious society founded by Pythagoras. In ancient Greece, math was intertwined with religion. The Pythagoreans believed in two key gods: Aperon, the god of infinity and chaos, and Peros, the god of the finite and order. They held that all numbers were rational, as irrational numbers represented the infinite and were considered bad. One of their axioms was that the length of every line was finite and rational. According to the Pythagorean theorem, a triangle with two sides of length 1 has a hypotenuse of \( \sqrt{2} \), which by their axioms, should be rational. However, they eventually discovered a proof that \( \sqrt{2} \) was irrational, causing a major crisis in their society. Their axioms were inconsistent, casting doubt on all their theorems. They tried to keep this proof a secret, but a whistleblower revealed it, and legend has it that they killed the person who exposed the proof.
-\end{example}
+This proof was first discovered by the Pythagoreans in ancient Greece, a religious society founded by Pythagoras. In ancient Greece, math was intertwined with religion. The Pythagoreans believed in two key gods: Aperon, the god of infinity and chaos, and Peros, the god of the finite and order. They held that all numbers were rational, as irrational numbers represented the infinite and were considered bad. One of their axioms was that the length of every line was finite and rational. According to the Pythagorean theorem, a triangle with two sides of length 1 has a hypotenuse of \( \sqrt{2} \), which by their axioms, should be rational. However, they eventually discovered a proof that \( \sqrt{2} \) was irrational, causing a major crisis in their society. Their axioms were inconsistent, casting doubt on all their theorems. They tried to keep this proof a secret, but a whistleblower revealed it, and legend has it that they killed the person who exposed the proof.
 
 \section{Induction Axiom}
 \begin{itemize}
-        \item Let \( P(n) \) be a predicate. If \( P(0) \) is true and \( \forall \; n \in \mathbb{N}, P(n) \implies P(n+1) \) is true, then \( \forall \; n \in \mathbb{N}, P(n) \) is true.
-        \item If \( P(0) \), \( P(0) \implies P(1) \), \( P(1) \implies P(2) \), \ldots are true.
+    \item Let \( P(n) \) be a predicate. If \( P(0) \) is true and \( \forall \; n \in \mathbb{N}, \, P(n) \implies P(n+1) \) is true, then \( \forall \; n \in \mathbb{N}, \, P(n) \) is true.
+    \item Equivalently, if \( P(0) \), \( P(0) \implies P(1) \), \( P(1) \implies P(2) \), \ldots are true.
 \end{itemize}
 
-You can view this like dominoes. If you can prove that the first domino falls, and that if any domino falls, the next one will fall, then all the dominoes will fall.
+You can view this like dominoes: if you prove that the first domino falls and that whenever one domino falls the next one does too, then all dominoes will eventually fall.
+\vspace{0.5cm}
 
-\textbf{Theorem:} \( \forall n \geq 0 \) \( 1 + 2 + 3 + \cdots + n = \frac{n(n+1)}{2} \)
+\subsection*{Theorem: \( \forall n \geq 0 \) \hspace{1cm} \( 1 + 2 + 3 + \cdots + n = \frac{n(n+1)}{2} \)}
+\begin{center}
+    \fbox{
+        \begin{minipage}{0.9\textwidth}
+            \textbf{Aside:} Here are different ways to express the sum of the first \( n \) natural numbers:
+            \begin{itemize}
+                \item \( 1 + 2 + 3 + \ldots + n \)
+                \item \( \sum_{i=1}^{n} i \)
+                \item \( \sum_{1 \leq i \leq n} i \)
+            \end{itemize}
+        \end{minipage}
+    }
+\end{center}
+\begin{center}
+    \fbox{
+        \begin{minipage}{0.9\textwidth}
+            \textbf{Examples:}
+            \begin{itemize}
+                \item If \( n = 1 \)
+                \begin{align*}
+                    1 + \cancel{2} + \cancel{3} + \cdots + n &= 1
+                \end{align*}
+                \item If \( n \leq 0 \)
+                \begin{align*}
+                    \cancel{1} + \cancel{2} + \cancel{3} + \cdots + n &= 0
+                \end{align*}
+                \item If \( n = 4 \)
+                \begin{align*}
+                    1 + 2 + 3 + 4 &= 10
+                \end{align*}
+            \end{itemize}
+        \end{minipage}
+    }
+\end{center}
 
-Aside: Here are different ways to express the sum of the first \( n \) natural numbers:
+\textbf{Proof:} (by induction)\\
+Let \( P(n) \) be the proposition that \( \sum_{i=1}^{n} i = \frac{n(n+1)}{2} \).
 \begin{itemize}
-         \item \( 1 + 2 + 3 + \ldots + n \)
-         \item \( \sum_{i=1}^{n} i \)
-         \item \( \sum_{1 \leq i \leq n} i \)
+    \item \textbf{Base case:} \( P(0) \) is true because \( \sum_{i=1}^{0} i = 0 = \frac{0(0+1)}{2} \).
+    \item \textbf{Inductive step:} For \( n \geq 0 \), assume \( P(n) \) is true (i.e., \( 1 + 2 + \cdots + n = \frac{n(n+1)}{2} \)). We need to show that
+    \[
+    1+2+\cdots+n+(n+1) = \frac{(n+1)(n+2)}{2}.
+    \]
+    \begin{align*}
+        \sum_{i=1}^{n+1} i &= \sum_{i=1}^{n} i + (n+1) \\
+        &= \frac{n(n+1)}{2} + (n+1) \\
+        &= \frac{n(n+1) + 2(n+1)}{2} \\
+        &= \frac{(n+1)(n+2)}{2} \quad \checkmark
+    \end{align*}
+    Therefore, \( P(n+1) \) is true.
 \end{itemize}
 
-If \( n=1 \)
-\hspace*{1cm}
-\( 1 + \cancel{2} + \cancel{3} + \cdots + n = 1 \)
-
-If \( n \leq 0 \)
-\hspace*{1cm}
-\( \cancel{1} + \cancel{2} + \cancel{3} + \cdots + n = 0 \)
-
-If \( n = 4 \)
-\hspace*{1cm}
-\( 1 + 2 + 3 + 4 = 10 \)
+\subsection*{Theorem: \( \forall n \in \mathbb{N} \) \hspace{1cm} \( 3 \mid (n^3 - n) \)}
+\textbf{Example:} For \( n = 5 \), \( 3 \mid (125 - 5) \).
 
 \textbf{Proof:} (by induction)
 
-Let \( P(n) \) be the proposition that \( \sum_{i=1}^{n} i = \frac{n(n+1)}{2} \).
+Let \( P(n) \) be the proposition that \( 3 \mid (n^3 - n) \).
 
 \begin{itemize}
-        \item Base case: \( P(0) \) is true because \( \sum_{i=1}^{0} i = 0 = \frac{0(0+1)}{2} \).
-        \item Inductive step: For \( n \geq 0 \), show \( P(n) \implies P(n+1) \).
-        \item Assume \( P(n) \) is true for purposes of induction (we assumed \( 1 + 2 + \cdots + n = \frac{n(n+1)}{2} \) ).
-        \item We need to show that \( 1+2+\cdots+n+(n+1) = \frac{(n+1)(n+2)}{2} \).
-        \begin{align*}
-                \sum_{i=1}^{n+1} i &= \sum_{i=1}^{n} i + (n+1) \\
-                &= \frac{n(n+1)}{2} + (n+1) \\
-                &= \frac{n(n+1) + 2(n+1)}{2} \\
-                &= \frac{(n+1)(n+2)}{2} \quad \checkmark
-        \end{align*}
-        Therefore, \( P(n+1) \) is true.\ 
+    \item \textbf{Base case:} \( n = 0 \) \hspace{1cm} \(3 \mid (0-0) \)  \quad \checkmark
+    \item \textbf{Inductive step:} For \(n \geq 0\), show \(P(n) \implies P(n+1)\) is true.
 \end{itemize}
- % Stopped watching lecture at 36:40
+
+
+Assume \( P(n) \) is true, i.e., \( 3 \mid (n^3 - n) \). We need to show that \( 3 \mid ((n+1)^3 - (n+1)) \).
+
+\begin{align*}
+    (n+1)^3 - (n+1) &= n^3 + 3n^2 + 3n + 1 - (n + 1) \\
+    &= n^3 + 3n^2 + 3n + 1 - n - 1 \\
+    &= n^3 + 3n^2 + 2n \\
+    &= n^3 - n + 3n^2 + 3n \\
+    \text{and} \\
+    3 &\mid 3n^2 \\
+    3 &\mid 3n \\
+    3 &\mid (n^3 - n) \text{ by } P(n) \text{ (inductive hypothesis)} \\
+    \rightarrow 3 &\mid (n+1)^3 - (n+1) \quad \checkmark
+\end{align*}
+
+\textbf{Base Case:} \(P(b)\) is true
+
+\textbf{Inductive Step:} \(\forall n \geq\ b \hspace{1cm} P(n) \implies P(n+1)\)
+
+\textbf{Conclude:} \(\forall n \geq b \hspace{1cm} P(n)\)
+
+\subsection*{Theorum (not!): All horses are the same color.}
+
+\textbf{Proof:} (by induction)
+
+\(P(n)\): In any set of \(n \geq 1\) horses, the horses are all the same color.
+
+\textbf{Base Case:} \(P(1)\) is true because there is only one horse, so they are all the same color.
+
+\textbf{Inductive Step:} Assume \(P(n)\) is true, i.e., in any set of \(n\) horses, they are all the same color. We need to show that \(P(n+1)\) is true.
+\vspace{.5cm}
+
+Consider a set of \( n+1 \) horses \(H_{1}, H_{2}, \ldots, H_{n+1}\).
+
+Also, \(H_{2}, H_{3}, \ldots, H_{n+1}\) are all the same color.
+
+Since \(color(H_{1}) = color(H_{2}, \ldots, H_{n}) = color(H_{n+1})\)
+
+\(\rightarrow\) all \(n+1\) horses are the same color \(\rightarrow P(n+1)\)  \quad \checkmark
+
+\subsubsection*{What's the issue here?}
+
+One initial issue is in the predicate. There is the term "in any set" so there's really a for all sets assumption hidden there. This is unreasonable because while one set of horses may all be the same color, this doesn't mean that all sets of horses are the same color (even though according to our predicate that is the case).
+
+The even more \textbf{critical issue} is in the \(\ldots\) because while we proved the case \(P(n=0)\), we did not prove \(P(n=1)\) for when there are only two horses. When we utilize the logic of the proof going from 1 horse to 2 horses, we see that the \(color(H_{2}, \ldots, H_{n+1})\) becomes an empty set as there is only 1 horse in the full \(H_{1}, \ldots, H_{n+1}\) set. This breaks the bridge in the equality because the color of the \(color(H_{1}, \ldots, H_{n})\) set cannot equal the empty \(color(H_{2}, \ldots, H_{n+1})\) set.
+
+We proved \(P(1),  P(2)\implies P(3), P(3) \implies P(4), \ldots\)
+\begin{center}
+\(\forall n \geq 2 \hspace{.5cm} P(n) \implies P(n+1)\)
+\end{center}
+but we didn't prove \(P(1) \implies P(2)\).
+
+If we then just go from starting with 2 horses, the base case fails because we cannot know if two horses will be the same color.
+
+\textbf{Learning Point:} Always check the base case! You can prove some incredible stuff if you don't check the base case.
+
+% Ended lecture at 59:05
 \end{document}
